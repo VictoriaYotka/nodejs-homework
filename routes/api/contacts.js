@@ -1,5 +1,5 @@
 const express = require('express')
-const { listContacts } = require('../../models/contacts')
+const { listContacts, getContactById } = require('../../models/contacts')
 
 const router = express.Router()
 
@@ -13,7 +13,20 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  const {contactId} = req.params;
+  const data = await getContactById(contactId)
+  data === null 
+  ? 
+    res.json({ message: "Not found",
+    data,
+    status: 'rejected',
+    code: 404,})
+  :
+    res.json({ message: 'template message',
+    data,
+    status: 'success',
+    code: 200,
+ })
 })
 
 router.post('/', async (req, res, next) => {
