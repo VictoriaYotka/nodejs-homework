@@ -1,7 +1,21 @@
-const express = require('express')
-const { listContacts, getContactById, removeContact } = require('../../models/contacts')
+const express = require('express');
+const Joi = require('joi');
+const { nanoid } = require('nanoid');
+const { listContacts, getContactById, removeContact, addContact } = require('../../models/contacts')
 
 const router = express.Router()
+
+const contactSchema = Joi.object({
+  name: Joi.string().required().messages({
+      "any.required": `"name" must exist`,
+  }),
+  email: Joi.string().email().required().messages({
+    "any.required": `"email" must exist`,
+  }),
+ phone: Joi.string().required().messages({
+  "any.required": `"phone" must exist`,
+  }),
+})
 
 router.get('/', async (req, res, next) => {
   const data = await listContacts();
@@ -19,20 +33,16 @@ router.get('/:contactId', async (req, res, next) => {
   ? 
     res.json({ 
       message: "Not found",
-    data,
-    status: 'rejected',
-    code: 404,})
+      data,
+      status: 'rejected',
+      code: 404,})
   :
     res.json({ 
-    // message: 'template message',
-    data,
-    status: 'success',
-    code: 200,
+      // message: 'template message',
+      data,
+      status: 'success',
+      code: 200,
  })
-})
-
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
 })
 
 router.delete('/:contactId', async (req, res, next) => {
@@ -52,6 +62,24 @@ router.delete('/:contactId', async (req, res, next) => {
     code: 200,
   
   })
+})
+
+router.post('/', async (req, res, next) => {
+  const { error } = contactSchema.validate(req.body);
+  if(error)
+  { 
+  res.json({ 
+    message: "missing required name field",
+    status: 'rejected',
+    code: 400,})
+  }
+  const newContact = await addContact(req.body);
+  res.json({ 
+    message: 'contact added',
+    data: {...newContact, id: nanoid()},
+    status: 'success',
+    code: 201,
+  }) 
 })
 
 router.put('/:contactId', async (req, res, next) => {
