@@ -1,16 +1,5 @@
 [
   {
-    "name": "Victoria",
-    "email": "vvv@nbv.com",
-    "phone": "(000) 000-0000"
-  },
-  {
-    "id": "qdggE76Jtbfd9eWJHrssH",
-    "name": "Chaim Lewis",
-    "email": "dui.in@egetlacus.ca",
-    "phone": "(294) 840-6685"
-  },
-  {
     "id": "drsAJ4SHPYqZeG-83QTVW",
     "name": "Kennedy Lane",
     "email": "mattis.Cras@nonenimMauris.net",
@@ -59,7 +48,9 @@
     "phone": "(748) 206-2688"
   },
   {
-    "name": "Victoria",
-    "phone": "(000) 000-0000"
+    "name": "Chaim Lewis",
+    "email": "dui.in@egetlacus.ca",
+    "phone": "(294) 840-0000",
+    "id": "Mc3kBOHbuiLh7I6nTH8M4"
   }
 ]
