@@ -10,6 +10,7 @@ const contactSchema = Joi.object({
    phone: Joi.string().required().messages({
     "any.required": `"phone" must exist`,
     }),
+    favorite: Joi.boolean(). required(),
   })
 
 module.exports =  contactSchema;

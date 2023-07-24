@@ -1,10 +1,9 @@
-const { nanoid } = require('nanoid');
 const contactSchema = require('../schemas/contactSchema')
-const { listContacts, getContactById, removeContact, addContact, updateContact } = require('../models/contacts')
+const ContactModel = require('../models/contactModel')
 
 class Contacts {
     getContacts = async (req, res) => {
-        const data = await listContacts();
+        const data = await ContactModel.find();
         data === null 
         ? 
           res.json({ 
@@ -22,7 +21,7 @@ class Contacts {
 
     getContactById = async (req, res) => {
         const {contactId} = req.params;
-        const data = await getContactById(contactId)
+        const data = await ContactModel.findById(contactId)
         data === null 
         ? 
           res.json({ 
@@ -41,7 +40,7 @@ class Contacts {
 
     deleteContactById = async (req, res) => {
         const {contactId} = req.params;
-        const data = await removeContact(contactId)
+        const data = await ContactModel.findByIdAndDelete(contactId)
         data === null 
         ? 
         res.json({ 
@@ -67,7 +66,7 @@ class Contacts {
           status: 'rejected',
           code: 400,})
         }
-        const data = await addContact({...req.body, id: nanoid()});
+        const data = await ContactModel.create(req.body);
         res.json({ 
           message: 'Contactc successfully added',
           data,
@@ -86,7 +85,7 @@ class Contacts {
           status: 'rejected',
           code: 400,})
         }
-        const data = await updateContact(contactId, req.body)
+        const data = await ContactModel.findByIdAndUpdate(contactId, req.body, { new: true })
         data === null 
         ? 
         res.json({ 
