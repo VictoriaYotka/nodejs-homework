@@ -1,4 +1,4 @@
-const contactSchema = require('../schemas/contactSchema')
+const { contactSchema, contactFavoriteSchema } = require('../schemas/contactSchema')
 const ContactModel = require('../models/contactModel')
 
 class Contacts {
@@ -83,7 +83,8 @@ class Contacts {
         res.json({ 
           message: "Missing fields",
           status: 'rejected',
-          code: 400,})
+          code: 400,
+        })
         }
         const data = await ContactModel.findByIdAndUpdate(contactId, req.body, { new: true })
         data === null 
@@ -91,10 +92,39 @@ class Contacts {
         res.json({ 
           message: "Not found",
           status: 'rejected',
-          code: 404,})
+          code: 404,
+        })
         :
         res.json({ 
           message: 'Contact successfully updated',
+          data,
+          status: 'success',
+          code: 200,
+        })
+      };
+
+    updateStatusContact = async (req, res) => {
+        const {contactId} = req.params;
+        const { error } = contactFavoriteSchema.validate(req.body);
+        if(error)
+        { 
+        res.json({ 
+          message: "Missing fields",
+          status: 'rejected',
+          code: 400,
+        })
+        }
+        const data = await ContactModel.findByIdAndUpdate(contactId, req.body, { new: true })
+        data === null 
+        ? 
+        res.json({ 
+          message: "Not found",
+          status: 'rejected',
+          code: 404,
+        })
+        :
+        res.json({ 
+          message: 'Contact favorite successfully updated',
           data,
           status: 'success',
           code: 200,

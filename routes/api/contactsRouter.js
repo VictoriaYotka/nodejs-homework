@@ -13,4 +13,6 @@ contactsRouter.post('/', contactsController.addNewContact)
 
 contactsRouter.put('/:contactId', contactsController.editContactById)
 
+contactsRouter.patch('/:contactId/favorite', contactsController.updateStatusContact)
+
 module.exports = contactsRouter
