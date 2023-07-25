@@ -8,7 +8,6 @@ class Contacts {
         ? 
           res.json({ 
             message: "Not found",
-            data,
             status: 'rejected',
             code: 404,})
         :
@@ -26,7 +25,6 @@ class Contacts {
         ? 
           res.json({ 
             message: "Not found",
-            data,
             status: 'rejected',
             code: 404,})
         :
@@ -118,9 +116,9 @@ class Contacts {
         data === null 
         ? 
         res.json({ 
-          message: "Not found",
+          message: "missing field favorite",
           status: 'rejected',
-          code: 404,
+          code: 400,
         })
         :
         res.json({ 
