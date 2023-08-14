@@ -1,3 +1,5 @@
 const { contactSchema, contactFavoriteSchema } = require('./contactSchema')
 
-module.exports =  { contactSchema, contactFavoriteSchema };
+const userSchema = require('./userSchema')
+
+module.exports =  { contactSchema, contactFavoriteSchema, userSchema };

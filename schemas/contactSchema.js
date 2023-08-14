@@ -11,6 +11,7 @@ const contactSchema = Joi.object({
     "any.required": `"phone" must exist`,
     }),
     favorite: Joi.boolean(). required(),
+    owner: Joi.string(). required(),
   })
 
   const contactFavoriteSchema = Joi.object({
