@@ -1,5 +1,5 @@
 const express = require('express');
-const contactsController = require('../../controllers/contactsController')
+const contactsController = require('../../controllers')
 
 const contactsRouter = express.Router()
 
