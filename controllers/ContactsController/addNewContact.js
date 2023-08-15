@@ -1,18 +1,21 @@
 const { contactSchema } = require('../../schemas')
 const ContactModel = require('../../models')
-
-
+const {ctrlWrapper, HttpError} = require('../../helpers')
 
 const addNewContact = async (req, res) => {
         const { error } = contactSchema.validate(req.body);
         if(error)
         { 
-        res.json({ 
-          message: "Missing required name field",
-          status: 'rejected',
-          code: 400,})
+          throw HttpError(400, "Missing required name field");
+        // res.json({ 
+        //   message: "Missing required name field",
+        //   status: 'rejected',
+        //   code: 400,})
         }
         const data = await ContactModel.create(req.body);
+        if(!data) {
+          throw HttpError(400, "Missing required name field");
+        }
         res.json({ 
           message: 'Contactc successfully added',
           data,
@@ -22,4 +25,4 @@ const addNewContact = async (req, res) => {
       };
 
 
-module.exports = addNewContact;
+module.exports = ctrlWrapper(addNewContact);

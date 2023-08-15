@@ -1,15 +1,16 @@
 const ContactModel = require('../../models')
-
+const {ctrlWrapper, HttpError} = require('../../helpers')
 
 const getContacts = async (req, res) => {
         const data = await ContactModel.find();
-        data === null 
-        ? 
-          res.json({ 
-            message: "Not found",
-            status: 'rejected',
-            code: 404,})
-        :
+        if(!data) {
+        throw HttpError(400, "Not found");
+        }
+          // res.json({ 
+          //   message: "Not found",
+          //   status: 'rejected',
+          //   code: 404,})
+      
         res.json({ 
           message: 'Contacts got successfully',
           data,
@@ -18,4 +19,4 @@ const getContacts = async (req, res) => {
       };
 
 
-module.exports = getContacts;
+module.exports =ctrlWrapper(getContacts);

@@ -1,5 +1,6 @@
 const { contactFavoriteSchema } = require('../../schemas')
 const ContactModel = require('../../models')
+const {ctrlWrapper} = require('../../helpers')
 
 const updateStatusContact = async (req, res) => {
         const {contactId} = req.params;
@@ -27,6 +28,6 @@ const updateStatusContact = async (req, res) => {
           status: 'success',
           code: 200,
         })
-      };
+};
 
-module.exports = updateStatusContact;
+module.exports =ctrlWrapper(updateStatusContact);
