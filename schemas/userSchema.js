@@ -1,18 +1,19 @@
 const Joi = require('joi');
 
-const userSchema = Joi.object({
-    password: Joi.string().required().messages({
-        "any.required": `"password" must exist`,
-    }),
-    email: Joi.string().email().required().messages({
-      "any.required": `"email" must exist`,
-    }),
-    subscription: Joi.string().required().messages({
-    "any.required": `"subscription" must exist`,
-    }),
-    token: Joi.string(). required(),
-  })
+const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+const registerUserSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(6).required(),
+  subscription: Joi.string().default("starter"),
+});
 
+const loginUserSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(6).required(),
+});
 
-module.exports =  userSchema;
+module.exports =  {
+  registerUserSchema,
+  loginUserSchema
+};
