@@ -12,10 +12,10 @@ const contactSchema = Joi.object({
     }),
     favorite: Joi.boolean(). required(),
     owner: Joi.string(). required(),
-  })
+})
 
-  const contactFavoriteSchema = Joi.object({
+const contactFavoriteSchema = Joi.object({
     favorite: Joi.boolean(). required(),
-  })
+})
 
 module.exports =  { contactSchema, contactFavoriteSchema };

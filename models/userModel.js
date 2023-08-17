@@ -1,14 +1,17 @@
 const { Schema, model } = require("mongoose");
+const { emailRegExp } = require('../constants')
 
 const userSchema = new Schema({
-    password: {
-        type: String,
-        required: [true, 'Set password for user'],
-      },
       email: {
         type: String,
+        match: emailRegExp,
         required: [true, 'Email is required'],
         unique: true,
+      },
+      password: {
+        type: String,
+        minlength: 6,
+        required: [true, 'Set password for user'],
       },
       subscription: {
         type: String,
@@ -16,7 +19,8 @@ const userSchema = new Schema({
         default: "starter"
       },
       token: {
-        type: String
+        type: String,
+        default: "",
       },
 }, {versionKey: false, timestamps: true});
 

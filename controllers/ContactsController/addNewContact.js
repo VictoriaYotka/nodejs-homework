@@ -12,7 +12,8 @@ const addNewContact = async (req, res) => {
         //   status: 'rejected',
         //   code: 400,})
         }
-        const data = await ContactModel.create(req.body);
+        const { _id: owner } = req.user;
+        const data = await ContactModel.create({...req.body, owner});
         if(!data) {
           throw HttpError(400, "Missing required name field");
         }

@@ -1,15 +1,14 @@
 const Joi = require('joi');
-
-const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const { emailRegExp } = require('../constants')
 
 const registerUserSchema = Joi.object({
-  email: Joi.string().pattern(emailRegexp).required(),
+  email: Joi.string().pattern(emailRegExp).required(),
   password: Joi.string().min(6).required(),
   subscription: Joi.string().default("starter"),
 });
 
 const loginUserSchema = Joi.object({
-  email: Joi.string().pattern(emailRegexp).required(),
+  email: Joi.string().pattern(emailRegExp).required(),
   password: Joi.string().min(6).required(),
 });
 

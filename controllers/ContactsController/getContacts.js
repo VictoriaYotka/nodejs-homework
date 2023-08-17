@@ -2,7 +2,8 @@ const ContactModel = require('../../models')
 const {ctrlWrapper, HttpError} = require('../../helpers')
 
 const getContacts = async (req, res) => {
-        const data = await ContactModel.find();
+  const { _id: owner } = req.user;
+        const data = await ContactModel.find({ owner });
         if(!data) {
         throw HttpError(400, "Not found");
         }

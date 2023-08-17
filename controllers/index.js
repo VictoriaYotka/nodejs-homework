@@ -1,7 +1,28 @@
-const contactsController = require("./ContactsController")
-const UserController = require('./UserController')
+const {
+    getContacts,
+    getContactById,
+    addNewContact,
+    deleteContactById,
+    editContactById,
+    updateStatusContact
+  } = require("./ContactsController")
+
+const {
+    registerUser,
+    loginUser,
+    getCurrentUser,
+    logoutUser
+} = require('./UserController')
 
 module.exports = {
-    contactsController,
-    UserController
+        getContacts,
+        getContactById,
+        addNewContact,
+        deleteContactById,
+        editContactById,
+        updateStatusContact,
+        registerUser,
+        loginUser,
+        getCurrentUser,
+        logoutUser
 }

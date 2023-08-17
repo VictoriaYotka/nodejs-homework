@@ -1,4 +1,4 @@
-const {HttpError} = require("../helpers");
+const { HttpError, ctrlWrapper } = require("../helpers");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 
@@ -26,4 +26,4 @@ const authCheck = async (req, res, next) => {
   }
 };
 
-module.exports = { authCheck };
+module.exports = ctrlWrapper(authCheck);
