@@ -1,5 +1,5 @@
 const { contactFavoriteSchema } = require('../../schemas')
-const ContactModel = require('../../models')
+const { ContactModel } = require('../../models')
 const {ctrlWrapper} = require('../../helpers')
 
 const updateStatusContact = async (req, res) => {

@@ -1,5 +1,5 @@
 const { contactSchema } = require('../../schemas')
-const ContactModel = require('../../models')
+const { ContactModel } = require('../../models')
 const {ctrlWrapper, HttpError} = require('../../helpers')
 
 const editContactById = async (req, res) => {
