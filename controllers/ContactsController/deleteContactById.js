@@ -1,16 +1,19 @@
-const ContactModel = require('../../models')
-
+const { ContactModel } = require('../../models')
+const {ctrlWrapper, HttpError} = require('../../helpers')
 
 const deleteContactById = async (req, res) => {
         const {contactId} = req.params;
         const data = await ContactModel.findByIdAndDelete(contactId)
-        data === null 
-        ? 
-        res.json({ 
-          message: "Not found",
-          status: 'rejected',
-          code: 404,})
-        :
+        // data === null 
+        // ? 
+        // res.json({ 
+        //   message: "Not found",
+        //   status: 'rejected',
+        //   code: 404,})
+        // :
+        if(!data) {
+          throw HttpError(404, "Not found");
+        }
         res.json({ 
           message: 'Contact successfully deleted',
           data,
@@ -21,4 +24,4 @@ const deleteContactById = async (req, res) => {
       };
 
 
-module.exports = deleteContactById;
+module.exports =ctrlWrapper(deleteContactById);
