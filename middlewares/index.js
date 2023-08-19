@@ -7,5 +7,5 @@ module.exports = {
     validateBody,
     authCheck,
     isIdValid,
-    upload
+    upload,
 }

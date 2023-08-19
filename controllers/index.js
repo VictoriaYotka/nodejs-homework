@@ -11,7 +11,8 @@ const {
     registerUser,
     loginUser,
     getCurrentUser,
-    logoutUser
+    logoutUser,
+    updateAvatar
 } = require('./UserController')
 
 module.exports = {
@@ -24,5 +25,6 @@ module.exports = {
         registerUser,
         loginUser,
         getCurrentUser,
-        logoutUser
+        logoutUser,
+        updateAvatar
 }
